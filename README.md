@@ -31,3 +31,9 @@
 ## フロー JSON
 
 [node-red_dir/flows.json](node-red_dir/flows.json)
+
+## Gitpod で試す
+
+以下ボタンをクリックすると Gitpod で試せます。
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/1ft-seabass/node-red-ogiri-01-csv-flow)
