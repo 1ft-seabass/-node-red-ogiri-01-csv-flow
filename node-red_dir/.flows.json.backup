@@ -106,7 +106,7 @@
                 "t": "set",
                 "p": "payload.date",
                 "pt": "msg",
-                "to": "$number($fromMillis($toMillis(payload.col1, '[Y]/[D]/[M]'), '[Y0001][M01][D01]'))",
+                "to": "$number($fromMillis($toMillis(payload.col1, '[Y]/[M]/[D]'), '[Y0001][M01][D01]'))",
                 "tot": "jsonata"
             }
         ],
@@ -227,7 +227,7 @@
         "id": "28906edc47fa3f2a",
         "type": "change",
         "z": "00e9275b751eb292",
-        "name": "list 記録",
+        "name": "flow.list 記録",
         "rules": [
             {
                 "t": "set",
@@ -242,7 +242,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 840,
+        "x": 850,
         "y": 320,
         "wires": [
             []

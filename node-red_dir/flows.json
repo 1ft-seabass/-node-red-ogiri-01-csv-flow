@@ -100,13 +100,13 @@
         "id": "c0ab66d4e0b1ce52",
         "type": "change",
         "z": "00e9275b751eb292",
-        "name": "日付を調整 2022/9/2 -> 2022/09/02",
+        "name": "日付を調整 2022/9/2 -> 20220902",
         "rules": [
             {
                 "t": "set",
                 "p": "payload.date",
                 "pt": "msg",
-                "to": "$number($fromMillis($toMillis(payload.col1, '[Y]/[D]/[M]'), '[Y0001][M01][D01]'))",
+                "to": "$number($fromMillis($toMillis(payload.col1, '[Y]/[M]/[D]'), '[Y0001][M01][D01]'))",
                 "tot": "jsonata"
             }
         ],
