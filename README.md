@@ -20,7 +20,7 @@
   - CSV データは全件で読み込んで split ノードで各行の処理を行ってます
 - データを記録する flow.list の空配列で初期化
 - 各行の処理
-  - 日付を調整 2022/9/2 -> 2022/09/02
+  - 日付を調整 2022/9/2 -> 20220902
     - JSONata 利用
   - 1件ごと今日以降かチェックして該当してたら flow.list 記録
     - switch ノードで JSONata 判定
@@ -37,3 +37,11 @@
 以下ボタンをクリックすると Gitpod で試せます。
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/1ft-seabass/node-red-ogiri-01-csv-flow)
+
+エディタが開いたら
+
+```
+npm run node-red
+```
+
+ターミナルでこちらのコマンドを実行。
