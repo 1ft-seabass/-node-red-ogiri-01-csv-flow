@@ -1,0 +1,281 @@
+[
+    {
+        "id": "00e9275b751eb292",
+        "type": "tab",
+        "label": "フロー 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "66240ffd3b1cafb9",
+        "type": "file in",
+        "z": "00e9275b751eb292",
+        "name": "",
+        "filename": "./quiz.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "Shift_JIS",
+        "allProps": false,
+        "x": 400,
+        "y": 160,
+        "wires": [
+            [
+                "9263eb2b9aeac535"
+            ]
+        ]
+    },
+    {
+        "id": "80168af824fca16e",
+        "type": "inject",
+        "z": "00e9275b751eb292",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "66240ffd3b1cafb9"
+            ]
+        ]
+    },
+    {
+        "id": "3330889fa12771f2",
+        "type": "debug",
+        "z": "00e9275b751eb292",
+        "name": "flow.list 抽出結果",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "$flowContext('list')",
+        "targetType": "jsonata",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1130,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "6942cdf50ec58c36",
+        "type": "csv",
+        "z": "00e9275b751eb292",
+        "name": "",
+        "sep": ",",
+        "hdrin": false,
+        "hdrout": "none",
+        "multi": "mult",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "1",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 820,
+        "y": 160,
+        "wires": [
+            [
+                "67ed2f330fb9a441"
+            ]
+        ]
+    },
+    {
+        "id": "c0ab66d4e0b1ce52",
+        "type": "change",
+        "z": "00e9275b751eb292",
+        "name": "日付を調整 2022/9/2 -> 2022/09/02",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.date",
+                "pt": "msg",
+                "to": "$number($fromMillis($toMillis(payload.col1, '[Y]/[D]/[M]'), '[Y0001][M01][D01]'))",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 360,
+        "wires": [
+            [
+                "2a1a89faed63d41a",
+                "cc6a735710f5bc2d"
+            ]
+        ]
+    },
+    {
+        "id": "cc6a735710f5bc2d",
+        "type": "switch",
+        "z": "00e9275b751eb292",
+        "name": "今日以降判定",
+        "property": "payload.date",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "$number($fromMillis($millis(), '[Y0001][M01][D01]'))",
+                "vt": "jsonata"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 660,
+        "y": 320,
+        "wires": [
+            [
+                "28906edc47fa3f2a"
+            ]
+        ]
+    },
+    {
+        "id": "9263eb2b9aeac535",
+        "type": "change",
+        "z": "00e9275b751eb292",
+        "name": "flow.list 初期化",
+        "rules": [
+            {
+                "t": "set",
+                "p": "list",
+                "pt": "flow",
+                "to": "[]",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 160,
+        "wires": [
+            [
+                "6942cdf50ec58c36"
+            ]
+        ]
+    },
+    {
+        "id": "67ed2f330fb9a441",
+        "type": "split",
+        "z": "00e9275b751eb292",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 150,
+        "y": 360,
+        "wires": [
+            [
+                "c0ab66d4e0b1ce52"
+            ]
+        ]
+    },
+    {
+        "id": "2a1a89faed63d41a",
+        "type": "join",
+        "z": "00e9275b751eb292",
+        "name": "",
+        "mode": "auto",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 970,
+        "y": 360,
+        "wires": [
+            [
+                "3330889fa12771f2"
+            ]
+        ]
+    },
+    {
+        "id": "28906edc47fa3f2a",
+        "type": "change",
+        "z": "00e9275b751eb292",
+        "name": "flow.list 記録",
+        "rules": [
+            {
+                "t": "set",
+                "p": "list",
+                "pt": "flow",
+                "to": "$append($flowContext('list'),payload)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3905e315018d63cf",
+        "type": "comment",
+        "z": "00e9275b751eb292",
+        "name": "join を待ち合わせ処理みたいに使う",
+        "info": "",
+        "x": 1060,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "7043a745961ef377",
+        "type": "comment",
+        "z": "00e9275b751eb292",
+        "name": "1件ごと今日以降かチェックして記録",
+        "info": "",
+        "x": 730,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "6f35d0d949896db3",
+        "type": "comment",
+        "z": "00e9275b751eb292",
+        "name": "Shift-JIS csv 読み込み",
+        "info": "",
+        "x": 440,
+        "y": 120,
+        "wires": []
+    }
+]

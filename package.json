@@ -1,0 +1,24 @@
+{
+  "name": "node-red-ogiri-01-csv-flow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "node-red": "^3.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "node-red": "node-red -u ./node-red_dir -s ./node-red_dir/setting.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1ft-seabass/node-red-ogiri-01-csv-flow.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1ft-seabass/node-red-ogiri-01-csv-flow/issues"
+  },
+  "homepage": "https://github.com/1ft-seabass/node-red-ogiri-01-csv-flow#readme"
+}
